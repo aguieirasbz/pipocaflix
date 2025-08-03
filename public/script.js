@@ -67,7 +67,7 @@ function criarBannerDinamico(filmes) {
     `;
     
     // <<< FAZ O SLIDE INTEIRO SER CLICÁVEL >>>
-    slide.onclick = () => mostrarPlayer(`https://www.youtube.com/embed/${filme.videoId}`, filme.videoId);
+   slide.onclick = () => mostrarPlayer(filme.videoId);
     
     slide.appendChild(slideContent);
     containerSlides.appendChild(slide);
@@ -132,7 +132,7 @@ function exibirFilmes() {
 
     const card = document.createElement("div");
     card.classList.add("filme-card");
-    card.onclick = () => mostrarPlayer(`https://www.youtube.com/embed/${filme.videoId}`, filme.videoId);
+    card.onclick = () => mostrarPlayer(filme.videoId);
     const img = document.createElement("img");
     img.src = `https://i3.ytimg.com/vi/${filme.videoId}/hqdefault.jpg`;
     const p = document.createElement("p");
@@ -145,11 +145,12 @@ function exibirFilmes() {
 
 function buscarFilmes() { exibirFilmes(); fecharPlayer(); }
 
-function mostrarPlayer(link, videoId) {
+function mostrarPlayer(videoId) {
   videoAtualId = videoId;
   const playerSection = document.getElementById("player-section");
   const frame = document.getElementById("videoFrame");
-  frame.src = `${link}?autoplay=1&rel=0`;
+   // Linha corrigida para usar o formato embed do YouTube
+  frame.src = `https://www.youtube.com/embed/${videoId}?autoplay=1&rel=0`;
   playerSection.style.display = "block";
   exibirFeedback(videoId);
   playerSection.scrollIntoView({ behavior: "smooth", block: "center" });
